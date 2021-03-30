@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<img src="..." class="img-fluid" alt="Responsive image">
+{{-- <img src="..." class="img-fluid" alt="Responsive image"> --}}
 
 @section('content')
 <div class="container-fluid">

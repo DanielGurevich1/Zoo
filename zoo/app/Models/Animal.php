@@ -18,4 +18,9 @@ class Animal extends Model
         return $this->belongsTo('App\Models\Manager', 'manager_id', 'id');
     }
     use HasFactory;
+    public function animaHasSpecialManager()
+    {
+        return $this->belongsTo('App\Models\Manager', 'manager_id', 'id');
+    }
+    // animalBelongsRusys == managerCaresRusys =>
 }

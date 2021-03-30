@@ -13,14 +13,14 @@
 
                     <form method="POST" action="{{route('animal.update', [$animal])}}">
 
-                        Nick: <input type="text" name="animal_nick" value="{{$animal->nick}}">
+                        Nick: <input type="text" name="animal_nick" value="{{old('animal_nick' ,$animal->nick)}}">
 
                         <select name="rusys_id">
                             @foreach ($rusys as $rusys)
                             <option value="{{$rusys->id}}" @if($rusys->id == $animal->rusys_id) selected @endif>{{$rusys->name}}</option>
                             @endforeach
                         </select>
-                        Year: <input type="text" name="animal_year" value="{{$animal->year}}">
+                        Year: <input type="text" name="animal_year" value="{{old('animal_year',$animal->year)}}">
                         Animal book: <textarea id="summernote" type="text" name="animal_book" value="{{$animal->animal_book}}">{{$animal->animal_book}}</textarea>
                         <select name="manager_id">
                             @foreach ($managers as $manager)

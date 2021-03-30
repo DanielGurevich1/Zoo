@@ -13,7 +13,8 @@
 
                         <div class="form-group">
                             <label>Change Name:</label>
-                            <input type="text" name="rusys_name" class="form-control" value="{{$rusys->name}}">
+                            <input type="text" name="rusys_name" class="form-control" value="{{old('rusys_name', $rusys->name)}}">
+
                             <small class="form-text text-muted">Have a new specie name?</small>
                         </div>
 

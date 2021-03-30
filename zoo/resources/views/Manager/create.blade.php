@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<img src="..." class="img-fluid" alt="Responsive image">
+{{-- <img src="..." class="img-fluid" alt="Responsive image"> --}}
 
 @section('content')
 <div class="container-fluid">
@@ -10,12 +10,12 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{route('manager.store')}}">
-                        Name: <input type="text" name="manager_name">
-                        Surname: <input type="text" name="manager_surname">
+                        Name: <input type="text" name="manager_name" value="{{old('manager_name')}}">
+                        Surname: <input type="text" name="manager_surname" value="{{old('manager_surname')}}">
 
                         <select name="rusys_id">
                             @foreach ($rusys as $rusys)
-                            <option value="{{$rusys->rusys_id}}">{{$rusys->name}}</option>
+                            <option value="{{$rusys->id}}">{{$rusys->name}}</option>
                             @endforeach
                         </select>
                         @csrf

@@ -6,6 +6,7 @@ use App\Models\Animal;
 use Illuminate\Http\Request;
 use App\Models\Rusys;
 use App\Models\Manager;
+use Validator;
 
 class AnimalController extends Controller
 {
@@ -45,6 +46,26 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'animal_nick' => ['required', 'min:3', 'max:10'],
+                'animal_year' => ['required', 'min:4', 'max:4'],
+
+
+            ],
+            [
+                'animal_nick.min' => 'Name is too short',
+                'animal_nick.max' => 'Name is too long',
+                'animal_year.min' => 'Year is wrong',
+            ],
+
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
         $animal = new Animal;
         $animal->nick = $request->animal_nick;
 
@@ -89,6 +110,27 @@ class AnimalController extends Controller
      */
     public function update(Request $request, Animal $animal)
     {
+
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'animal_nick' => ['required', 'min:3', 'max:10'],
+                'animal_year' => ['required', 'min:4', 'max:4'],
+
+
+            ],
+            [
+                'animal_nick.min' => 'Name is too short',
+                'animal_nick.max' => 'Name is too long',
+                'animal_year.min' => 'Year is wrong',
+            ],
+
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
         $animal->nick = $request->animal_nick;
 
         $animal->rusys_id = $request->rusys_id;

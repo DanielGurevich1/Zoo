@@ -6,6 +6,7 @@ use App\Models\Manager;
 use Illuminate\Http\Request;
 use App\Models\Rusys;
 use App\Models\Animal;
+use Validator;
 
 class ManagerController extends Controller
 {
@@ -33,6 +34,7 @@ class ManagerController extends Controller
     public function create()
 
     {
+
         $rusys = Rusys::all();
         return view('manager.create', ['rusys' => $rusys]);
     }
@@ -45,6 +47,25 @@ class ManagerController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'manager_name' => ['required', 'min:3', 'max:10'],
+                'manager_surname' => ['required', 'min:3', 'max:10'],
+
+
+            ],
+            [
+                'manager_name.min' => 'Name is too short',
+                'manager_name.max' => 'Name is too long',
+                'manager_surname.min' => 'Name is too short',
+                'manager_surname.max' => 'Name is too long',
+            ]
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
         $manager = new Manager;
         $manager->name = $request->manager_name;
         $manager->surname = $request->manager_surname;
@@ -86,6 +107,25 @@ class ManagerController extends Controller
      */
     public function update(Request $request, Manager $manager)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'manager_name' => ['required', 'min:3', 'max:10'],
+                'manager_surname' => ['required', 'min:3', 'max:10'],
+
+
+            ],
+            [
+                'manager_name.min' => 'Name is too short',
+                'manager_name.max' => 'Name is too long',
+                'manager_surname.min' => 'Name is too short',
+                'manager_surname.max' => 'Name is too long',
+            ]
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
         $manager->name = $request->manager_name;
         $manager->surname = $request->manager_surname;
 

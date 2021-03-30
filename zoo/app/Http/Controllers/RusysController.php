@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Models\Rusys;
 use Illuminate\Http\Request;
 
@@ -43,6 +44,22 @@ class RusysController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'rusys_name' => ['required', 'min:3', 'max:6'],
+
+            ],
+            [
+                'rusys_name.min' => 'Name is too short',
+                'rusys_name.max' => 'Name is too long',
+            ]
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
+
         $rusys = new Rusys;
         $rusys->name = $request->rusys_name;
 
@@ -81,6 +98,22 @@ class RusysController extends Controller
      */
     public function update(Request $request, Rusys $rusys)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'rusys_name' => ['required', 'min:3', 'max:10'],
+
+            ],
+            [
+                'rusys_name.min' => 'Name is too short',
+                'rusys_name.max' => 'Name is too long',
+            ]
+        );
+        if ($validator->fails()) {
+            $request->flash();
+            return redirect()->back()->withErrors($validator);
+        }
+
         $rusys->name = $request->rusys_name;
 
         $rusys->save();

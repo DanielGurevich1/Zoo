@@ -15,7 +15,7 @@
 
                         <div class="form-group">
                             <label>Name:</label>
-                            <input type="text" name="rusys_name" class="form-control">
+                            <input type="text" name="rusys_name" class="form-control" value="{{old('rusys_name')}}">
                             <small class="form-text text-muted">Enter specie name</small>
                         </div>
 

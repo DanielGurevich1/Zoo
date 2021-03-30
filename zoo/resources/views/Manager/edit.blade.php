@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<img src="..." class="img-fluid" alt="Responsive image">
+{{-- <img src="..." class="img-fluid" alt="Responsive image"> --}}
 
 @section('content')
 <div class="container-fluid">
@@ -11,8 +11,8 @@
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{route('manager.update', [$manager])}}">
-                        Name: <input type="text" name="manager_name" value="{{$manager->name}}">
-                        Surname: <input type="text" name="manager_surname" value="{{$manager->surname}}">
+                        Name: <input type="text" name="manager_name" value="{{old('manager_name',$manager->name)}}">
+                        Surname: <input type="text" name="manager_surname" value="{{old('manager_surname',$manager->surname)}}">
 
                         <select name="rusys_id">
                             @foreach ($rusys as $rusys)

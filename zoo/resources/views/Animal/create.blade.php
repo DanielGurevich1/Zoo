@@ -11,14 +11,14 @@
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{route('animal.store')}}">
-                        Nick: <input type="text" name="animal_nick">
+                        Nick: <input type="text" name="animal_nick" value="{{old('animal_name')}}">
 
                         <select name="rusys_id">
                             @foreach ($rusys as $rusys)
                             <option value="{{$rusys->id}}">{{$rusys->name}}</option>
                             @endforeach
                         </select>
-                        Year: <input type="text" name="animal_year">
+                        Year: <input type="text" name="animal_year" value="{{old('animal_year')}}">
                         Animal book: <textarea type="text" id="summernote" name="animal_book"></textarea>
                         <select name="manager_id">
                             @foreach ($managers as $manager)
