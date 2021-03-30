@@ -12,4 +12,8 @@ class Manager extends Model
     {
         return $this->belongsTo('App\Models\Rusys', 'rusys_id', 'id');
     }
+    public function managerHasAnimals()
+    {
+        return $this->hasMany('App\Models\Animal', 'manager_id', 'id');
+    }
 }

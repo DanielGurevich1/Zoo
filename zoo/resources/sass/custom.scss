@@ -1,0 +1,12 @@
+.list-line {
+    display: flex;
+    justify-content: space-between;
+    &__buttons{
+        display:inline-block;
+        display: flex;
+        
+        &>*{
+            margin:5px; 
+        }
+    }
+}

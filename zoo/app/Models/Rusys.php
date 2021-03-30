@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Rusys extends Model
 {
     use HasFactory;
+
+    public function rusysHasManagers()
+    {
+        return $this->hasMany('App\Models\Manager', 'rusys_id', 'id');
+    }
 }

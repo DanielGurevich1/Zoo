@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class RusysController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +47,7 @@ class RusysController extends Controller
         $rusys->name = $request->rusys_name;
 
         $rusys->save();
-        return redirect()->route('rusys.index');
+        return redirect()->route('rusys.index')->with('success_message', 'Specie was created!');
     }
 
     /**
@@ -78,7 +84,7 @@ class RusysController extends Controller
         $rusys->name = $request->rusys_name;
 
         $rusys->save();
-        return redirect()->route('rusys.index');
+        return redirect()->route('rusys.index')->with('success_message', 'Specie was updated!');
     }
 
     /**
@@ -89,7 +95,13 @@ class RusysController extends Controller
      */
     public function destroy(Rusys $rusys)
     {
-        $rusys->delete();
-        return redirect()->route('rusys.index');
+        if ($rusys->rusysHasManagers->count()) {
+            return redirect()->route('rusys.index')->with('info_message', 'Cannot delete species with assigned managers.');
+        } else {
+
+
+            $rusys->delete();
+            return redirect()->route('rusys.index')->with('info_message', 'Specie was deleted!');
+        }
     }
 }

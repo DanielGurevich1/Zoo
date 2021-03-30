@@ -9,6 +9,11 @@ use App\Models\Manager;
 
 class AnimalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,7 +53,7 @@ class AnimalController extends Controller
         $animal->animal_book = $request->animal_book;
         $animal->manager_id = $request->manager_id;
         $animal->save();
-        return redirect()->route('animal.index');
+        return redirect()->route('animal.index')->with('success_message', 'Animal was created!');;
     }
 
     /**
@@ -71,8 +76,8 @@ class AnimalController extends Controller
     public function edit(Animal $animal)
     {
         $rusys = Rusys::all();
-        $manager = Manager::all();
-        return view('animal.edit', ['manager' => $manager, 'rusys' => $rusys, 'animal' => $animal]);
+        $managers = Manager::all();
+        return view('animal.edit', ['managers' => $managers, 'rusys' => $rusys, 'animal' => $animal]);
     }
 
     /**
@@ -91,7 +96,7 @@ class AnimalController extends Controller
         $animal->animal_book = $request->animal_book;
         $animal->manager_id = $request->manager_id;
         $animal->save();
-        return redirect()->route('animal.index');
+        return redirect()->route('animal.index')->with('success_message', 'Animal was updated!');
     }
 
     /**
@@ -102,6 +107,8 @@ class AnimalController extends Controller
      */
     public function destroy(Animal $animal)
     {
-        //
+
+        $animal->delete();
+        return redirect()->route('animal.index')->with('info_message', 'Animal was deleted!');
     }
 }

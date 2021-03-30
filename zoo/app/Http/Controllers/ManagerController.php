@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Manager;
 use Illuminate\Http\Request;
 use App\Models\Rusys;
+use App\Models\Animal;
 
 class ManagerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,7 +51,7 @@ class ManagerController extends Controller
 
         $manager->rusys_id = $request->rusys_id;
         $manager->save();
-        return redirect()->route('manager.index');
+        return redirect()->route('manager.index')->with('success_message', 'Manager was created!');
     }
 
     /**
@@ -85,7 +91,7 @@ class ManagerController extends Controller
 
         $manager->rusys_id = $request->rusys_id;
         $manager->save();
-        return redirect()->route('manager.index');
+        return redirect()->route('manager.index')->with('success_message', 'Manager was updated!');
     }
 
     /**
@@ -96,11 +102,11 @@ class ManagerController extends Controller
      */
     public function destroy(Manager $manager)
     {
-        if ($manager->rusysManager->count()) {
-            return 'Trinti negalima, nes turi gyvunu';
+        if ($manager->managerHasAnimals->count()) {
+            return redirect()->route('rusys.index')->with('info_message', 'Cannot delete managers with assigned animals.');
         }
 
         $manager->delete();
-        return redirect()->route('manager.index');
+        return redirect()->route('manager.index')->with('info_message', 'Manager was deleted!');
     }
 }
