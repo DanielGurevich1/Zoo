@@ -1,12 +1,11 @@
-.list-line {
+.list-line{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     &__buttons{
-        display:inline-block;
-        display: flex;
-        
-        &>*{
-            margin:5px; 
-        }
+display: flex;
+&>*{
+    margin:15px;
+}
     }
 }

@@ -47,7 +47,7 @@ class RusysController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'rusys_name' => ['required', 'min:3', 'max:6'],
+                'rusys_name' => ['required', 'min:3', 'max:15'],
 
             ],
             [
@@ -101,7 +101,7 @@ class RusysController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'rusys_name' => ['required', 'min:3', 'max:10'],
+                'rusys_name' => ['required', 'min:3', 'max:15'],
 
             ],
             [

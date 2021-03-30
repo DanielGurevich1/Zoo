@@ -4,10 +4,11 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
-                <h3 style="color:brown;">Edit a specie</h3>
-
+                <div class="card-header">
+                    <h3 style="color:brown;">Edit a specie</h3>
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{route('rusys.update',[$rusys->id])}}">
 

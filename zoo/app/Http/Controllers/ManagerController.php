@@ -143,7 +143,7 @@ class ManagerController extends Controller
     public function destroy(Manager $manager)
     {
         if ($manager->managerHasAnimals->count()) {
-            return redirect()->route('rusys.index')->with('info_message', 'Cannot delete managers with assigned animals.');
+            return redirect()->route('manager.index')->with('info_message', 'Cannot delete managers with assigned animals.');
         }
 
         $manager->delete();

@@ -4,34 +4,52 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h3 style="color:brown;">Edit Animals</h3>
+                    <h3 style="color:brown;">Create Animal registry</h3>
                 </div>
                 <div class="card-body">
+                    <ul class="list-group">
+                        <form method="POST" action="{{route('animal.store')}}">
 
-                    <form method="POST" action="{{route('animal.update', [$animal])}}">
+                            <div class="form-group">
+                                <label>Nick:</label>
+                                <input type="text" name="animal_nick" class="form-control" value="{{old('animal_nick', $animal->nick)}}">
+                                <small class="form-text text-muted">You can choose a nick </small>
+                            </div>
+                            <div class="form-group">
+                                <label>Year:</label>
+                                <input type="text" name="animal_year" class="form-control" value="{{old('animal_year', $animal->year)}}">
+                                <small class="form-text text-muted">You can choose a nick </small>
+                            </div>
+                            <div class="form-group">
+                                <label>Animal book:</label>
+                                <textarea type="text" id="summernote" name="animal_book"></textarea>
+                                <small class="form-text text-muted">You can give a description </small>
+                            </div>
+                            <div class="form-group">
+                                <label>Specie:</label>
+                                <select name="rusys_id">
+                                    @foreach ($rusys as $rusys)
+                                    <option value="{{$rusys->id}}">{{$rusys->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Manager:</label>
+                                <select name="manager_id">
+                                    @foreach ($managers as $manager)
+                                    <option value="{{$manager->id}}">{{$manager->name}} {{$manager->surname}}</option>
+                                    @endforeach
+                                </select>
+                                @csrf
 
-                        Nick: <input type="text" name="animal_nick" value="{{old('animal_nick' ,$animal->nick)}}">
-
-                        <select name="rusys_id">
-                            @foreach ($rusys as $rusys)
-                            <option value="{{$rusys->id}}" @if($rusys->id == $animal->rusys_id) selected @endif>{{$rusys->name}}</option>
-                            @endforeach
-                        </select>
-                        Year: <input type="text" name="animal_year" value="{{old('animal_year',$animal->year)}}">
-                        Animal book: <textarea id="summernote" type="text" name="animal_book" value="{{$animal->animal_book}}">{{$animal->animal_book}}</textarea>
-                        <select name="manager_id">
-                            @foreach ($managers as $manager)
-                            <option value="{{$manager->id}}" @if($manager->id == $animal->manager_id) selected @endif> {{$manager->name}}</option>
-                            @endforeach
-                        </select>
-                        @csrf
-                        <button type="submit" class="btn btn-outline-primary btn-sm">Edit</button>
-
-                    </form>
-
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-outline-primary btn-sm">ADD</button>
+                            </div>
+                        </form>
                 </div>
 
             </div>
