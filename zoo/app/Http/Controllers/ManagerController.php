@@ -20,12 +20,40 @@ class ManagerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $managers = Manager::all();
-        return view('manager.index', ['managers' => $managers]);
-    }
 
+
+        // $managers = Manager::all();
+        $rusys = Rusys::all();
+        // dd($request->rusys_id);
+        //     //     //FILTRAVIMAS
+        if ($request->rusys_id) {
+            $managers  = Manager::where('rusys_id', $request->rusys_id)->get();
+            $filterBy = $request->rusys_id;
+        } else {
+            $managers = Manager::all();
+        }
+
+        //     //RUSIAVIMAS
+        if ($request->sort && 'asc' == $request->sort) {
+            $managers = $managers->sortBy('name');
+            $sortBy = 'asc';
+        } elseif ($request->sort && 'desc' == $request->sort) {
+            $managers = $managers->sortByDesc('name');
+            $sortBy = 'desc';
+        }
+
+
+
+        return view('manager.index', [
+            'managers' => $managers,
+            'rusys' => $rusys,
+            'filterBy' => $filterBy ?? 0,
+            'sortBy' => $sortBy ?? ''
+        ]);
+    }
+    // 'animals' => $animals]
     /**
      * Show the form for creating a new resource.
      *

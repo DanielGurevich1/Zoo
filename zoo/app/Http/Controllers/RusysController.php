@@ -19,10 +19,14 @@ class RusysController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ('name' == $request->sort) {
+            $rusys = Rusys::orderBy('name')->get();
+        } else {
+            $rusys = Rusys::all();
+        }
 
-        $rusys = Rusys::all();
         return view('rusys.index', ['rusys' => $rusys]);
     }
 

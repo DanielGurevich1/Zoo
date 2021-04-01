@@ -8,6 +8,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 style="color:brown;">List of species</h3>
+                    <a href="{{route('rusys.index', ['sort' => 'name'])}}">Sort by name</a>
                 </div>
 
                 <div class="card-body">

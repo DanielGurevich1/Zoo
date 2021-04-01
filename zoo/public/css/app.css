@@ -10956,4 +10956,10 @@ a.text-dark:focus {
   margin: 15px;
 }
 
+.make-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
