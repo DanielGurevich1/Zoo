@@ -6,7 +6,9 @@ use App\Models\Animal;
 use Illuminate\Http\Request;
 use App\Models\Rusys;
 use App\Models\Manager;
+use App\Rules\AnimalCreationValidation;
 use Validator;
+
 
 class AnimalController extends Controller
 {
@@ -46,12 +48,15 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
+        // $manager = Manager::all();
+        $this->validate($request, ['animal_year' => new AnimalCreationValidation]);
 
         $validator = Validator::make(
             $request->all(),
             [
                 'animal_nick' => ['required', 'min:3', 'max:10'],
                 'animal_year' => ['required', 'min:4', 'max:4'],
+
 
 
             ],
@@ -66,6 +71,14 @@ class AnimalController extends Controller
             $request->flash();
             return redirect()->back()->withErrors($validator);
         }
+        // 5 uzd
+        $manager = Manager::find($request->manager_id);
+        // dd($manager);
+        if ($manager->rusys_id != $request->rusys_id) {
+            $request->flash();
+            return redirect()->back()->with('info_message', 'Animal was not created!');
+        }
+
         $animal = new Animal;
         $animal->nick = $request->animal_nick;
 
@@ -73,8 +86,14 @@ class AnimalController extends Controller
         $animal->year = $request->animal_year;
         $animal->animal_book = $request->animal_book;
         $animal->manager_id = $request->manager_id;
-        $animal->save();
-        return redirect()->route('animal.index')->with('success_message', 'Animal was created!');;
+
+        if ($animal->rusys_id == $request->manager_id) {
+            $animal->save();
+            return redirect()->route('animal.index')->with('success_message', 'Animal was created!');
+        } else {
+
+            return redirect()->route('manager.index')->with('info_message', 'Sorry Animal was not created, you have to choose a right Manager for him');
+        }
     }
 
     /**

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<img src="..." class="img-fluid" alt="Responsive image">
+{{-- <img src="..." class="img-fluid" alt="Responsive image"> --}}
 
 @section('content')
 <div class="container">
@@ -11,7 +11,7 @@
                     <a href="{{route('rusys.index', ['sort' => 'name'])}}">Sort by name</a>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body cd">
                     <ul class="list-group">
                         @foreach ($rusys as $rusys)
 

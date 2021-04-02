@@ -23,11 +23,9 @@ class ManagerController extends Controller
     public function index(Request $request)
     {
 
-
-        // $managers = Manager::all();
         $rusys = Rusys::all();
-        // dd($request->rusys_id);
-        //     //     //FILTRAVIMAS
+
+        //FILTRAVIMAS
         if ($request->rusys_id) {
             $managers  = Manager::where('rusys_id', $request->rusys_id)->get();
             $filterBy = $request->rusys_id;
@@ -35,7 +33,7 @@ class ManagerController extends Controller
             $managers = Manager::all();
         }
 
-        //     //RUSIAVIMAS
+        //RUSIAVIMAS
         if ($request->sort && 'asc' == $request->sort) {
             $managers = $managers->sortBy('name');
             $sortBy = 'asc';
@@ -44,8 +42,6 @@ class ManagerController extends Controller
             $sortBy = 'desc';
         }
 
-
-
         return view('manager.index', [
             'managers' => $managers,
             'rusys' => $rusys,
@@ -53,7 +49,7 @@ class ManagerController extends Controller
             'sortBy' => $sortBy ?? ''
         ]);
     }
-    // 'animals' => $animals]
+
     /**
      * Show the form for creating a new resource.
      *
@@ -80,8 +76,6 @@ class ManagerController extends Controller
             [
                 'manager_name' => ['required', 'min:3', 'max:10'],
                 'manager_surname' => ['required', 'min:3', 'max:10'],
-
-
             ],
             [
                 'manager_name.min' => 'Name is too short',
@@ -140,8 +134,6 @@ class ManagerController extends Controller
             [
                 'manager_name' => ['required', 'min:3', 'max:10'],
                 'manager_surname' => ['required', 'min:3', 'max:10'],
-
-
             ],
             [
                 'manager_name.min' => 'Name is too short',
