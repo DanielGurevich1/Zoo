@@ -1,6 +1,8 @@
 @extends('layouts.app')
 {{-- <img src="..." class="img-fluid" alt="Responsive image"> --}}
 
+{{-- <img class="img_header" src="../public/img/header.png" alt="img_header"> --}}
+{{-- <img src="../public/img/header.png" alt="img_header" class="img-fluid img-c"> --}}
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

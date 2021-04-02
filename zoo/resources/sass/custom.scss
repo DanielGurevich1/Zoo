@@ -24,3 +24,9 @@
 .card > .card-body.cd {
     background-color: aqua;
 }
+
+.img-fluid.img-c{
+    width:100%;
+    height: 50%;
+    object-fit: cover;
+}
