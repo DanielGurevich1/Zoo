@@ -7,6 +7,7 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
+
                 <form action="{{route('manager.index')}}" method="get" class="make-inline">
                     <div class="form-group make-inline">
                         <h2 style="color:red;">List of Managers</h2>
@@ -36,36 +37,36 @@
                     <button type="submit" class="btn btn-info">Filter</button>
                     <a href="{{route('manager.index')}}" class="btn btn-info">Clear filter</a>
                 </form>
-                {{-- </div> --}}
             </div>
-            <div class="card-body">
-                <ul class="list-group">
-                    @foreach ($managers as $manager)
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                @foreach ($managers as $manager)
 
-                    <li class="list-group-item list-line">
-                        <div>
-                            <h2>{{$manager->name}} {{$manager->surname}}</h2> responsible for {{$manager->rusysManager->name}}
-                        </div>
-                        <div class="list-line__buttons">
-                            <form method="get" action="{{route('manager.edit', [$manager])}}">
-                                <button style="{{route('manager.edit',[$manager])}}" class="btn btn-outline-primary btn-sm">Edit</button>
-                                @csrf
-                            </form>
-                            <form method="post" action="{{route('manager.destroy', [$manager])}}">
+                <li class="list-group-item list-line">
+                    <div>
+                        <h2>{{$manager->name}} {{$manager->surname}}</h2> responsible for {{$manager->rusysManager->name}}
+                    </div>
+                    <div class="list-line__buttons">
+                        <form method="get" action="{{route('manager.edit', [$manager])}}">
+                            <button style="{{route('manager.edit',[$manager])}}" class="btn btn-outline-primary btn-sm">Edit</button>
+                            @csrf
+                        </form>
+                        <form method="post" action="{{route('manager.destroy', [$manager])}}">
 
-                                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
-                                @csrf
-                            </form>
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                            @csrf
+                        </form>
 
-                        </div>
-                    </li>
-                    @endforeach
-                </ul>
-
-            </div>
-
+                    </div>
+                </li>
+                @endforeach
+            </ul>
 
         </div>
+
+
     </div>
+</div>
 </div>
 @endsection
